@@ -1,5 +1,7 @@
+import CoinsTable from '../components/CoinsTable';
+
 function App() {
-  return <h1>Hello React!</h1>;
+  return <CoinsTable />;
 }
 
 export default App;

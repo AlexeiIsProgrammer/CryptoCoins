@@ -1,0 +1,19 @@
+.button {
+  padding: 10px;
+  color: white;
+  background-color: black;
+  font-size: 25px;
+  border-radius: 10px;
+  outline: none;
+  border-color: 1px solid;
+
+  &:disabled {
+    opacity: 0.5;
+    color: gray;
+    cursor: default;
+  }
+
+  &:not(:disabled):hover {
+    border-color: white;
+  }
+}

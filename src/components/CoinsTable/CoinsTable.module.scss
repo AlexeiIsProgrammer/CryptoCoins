@@ -1,0 +1,39 @@
+.table {
+  border: 1px solid black;
+
+  padding: 10px;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.table__row {
+  color: black;
+}
+
+@mixin table-block {
+  border-radius: 5px;
+  padding: 5px;
+  background-color: aliceblue;
+}
+
+.table__header {
+  @include table-block;
+}
+.table__body {
+  @include table-block;
+  border: 1px solid gray;
+}
+
+.row {
+  border: 1px solid black;
+  padding: 2px;
+}
+
+.cell {
+  color: black;
+  border: 1px solid black;
+  padding: 2px;
+
+  text-align: center;
+  vertical-align: middle;
+}
