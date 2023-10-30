@@ -13,10 +13,10 @@ export default function PopularCoins() {
 
   switch (true) {
     case isLoading:
-      content = <h1>Data Loading...</h1>;
+      content = <h2>Data Loading...</h2>;
       break;
     case error !== undefined:
-      content = <h1>Data Fetching Error :/</h1>;
+      content = <h2>Data Fetching Error :/</h2>;
       break;
     default:
       content = (

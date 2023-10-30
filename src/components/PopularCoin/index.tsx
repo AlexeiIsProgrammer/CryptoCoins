@@ -8,7 +8,7 @@ export default function PopularCoin({ coin }: PopularCoinProps) {
 
   return (
     <div className={styles['popular-coin']}>
-      <span className={styles['popular-coin__name']}></span> {symbol}
+      <span className={styles['popular-coin__name']}>{symbol}</span>
       <span className={styles['popular-coin__price']}>
         {convertValueToPrice(priceUsd)}
       </span>

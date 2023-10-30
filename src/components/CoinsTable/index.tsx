@@ -3,10 +3,10 @@ import coinsAPI from '../../services/CoinsService';
 import Coin from '../Coin';
 import styles from './CoinsTable.module.scss';
 import Pagination from '../Pagination';
-import Input from '../UI/Input';
 import { valueIsNull, valueIsZero } from '../../utils';
 import { ICoin } from '../../services/CoinsService/types/interfaces';
 import SortHeader from '../SortHeader';
+import TextInput from '../UI/TextInput';
 
 export default function CoinsTable() {
   const [page, setPage] = useState(1);
@@ -75,7 +75,7 @@ export default function CoinsTable() {
                   24hPercent
                 </SortHeader>
                 <th className={styles.cell}>
-                  <Input
+                  <TextInput
                     placeholder="Search coins.."
                     value={searchQuery}
                     onChange={(e: React.FormEvent<HTMLInputElement>) => {

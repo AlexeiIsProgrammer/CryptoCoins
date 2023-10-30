@@ -1,0 +1,22 @@
+.bag-coin {
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+
+  color: white;
+  padding: 5px;
+  border: 1px solid black;
+
+  &__name {
+    font-size: 25px;
+  }
+  &__price {
+    font-size: 25px;
+  }
+  &__count {
+    font-size: 15px;
+  }
+}

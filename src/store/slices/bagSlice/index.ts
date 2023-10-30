@@ -1,27 +1,69 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import { BagCoin, ModalType } from '../../types/types';
 
-interface CounterState {
-  value: number;
+interface BagState {
+  coins: BagCoin[];
+  loading: boolean;
+  error: '';
+
+  modal: {
+    isOpened: boolean;
+    type: ModalType;
+  };
+
+  coinToBuy: BagCoin | null;
 }
 
-const initialState = { value: 0 } as CounterState;
+const initialState: BagState = {
+  coins: [],
+  error: '',
+  loading: false,
+
+  modal: {
+    type: 'buy-coin',
+    isOpened: false,
+  },
+  coinToBuy: null,
+};
 
 const bagSlice = createSlice({
   name: 'bag',
   initialState,
   reducers: {
-    increment(state) {
-      state.value += 1;
+    disableModal(state) {
+      state.modal.isOpened = false;
     },
-    decrement(state) {
-      state.value += 1;
+    enableModal(state, action: PayloadAction<ModalType>) {
+      state.modal = {
+        isOpened: true,
+        type: action.payload,
+      };
     },
-    incrementByAmount(state, action: PayloadAction<number>) {
-      state.value += action.payload;
+    buyCoin(state, action: PayloadAction<BagCoin>) {
+      state.modal = {
+        isOpened: true,
+        type: 'buy-coin',
+      };
+      state.coinToBuy = action.payload;
+    },
+    removeCoin(state, action: PayloadAction<string>) {
+      state.coins = state.coins.filter((coin) => coin.id !== action.payload);
+    },
+    addCoin(state, action: PayloadAction<BagCoin>) {
+      const existedCoin = state.coins.find(
+        (coin) => action.payload.id === coin.id
+      );
+
+      if (!existedCoin) {
+        state.coins = [...state.coins, action.payload];
+      }
+
+      state.modal.isOpened = false;
     },
   },
 });
 
-export const { increment, decrement, incrementByAmount } = bagSlice.actions;
+export const { addCoin, removeCoin, disableModal, enableModal, buyCoin } =
+  bagSlice.actions;
 export default bagSlice.reducer;
