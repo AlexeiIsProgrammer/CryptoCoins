@@ -1,0 +1,10 @@
+.sort-header {
+  &_ {
+  }
+  &_asc {
+    color: green;
+  }
+  &_desc {
+    color: blue;
+  }
+}
