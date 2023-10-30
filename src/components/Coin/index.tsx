@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import CoinProps from './types/types';
 import Button from '../UI/Button';
 import { cell__button } from './Coin.module.scss';
@@ -26,7 +27,10 @@ export default function Coin({ coin, index }: CoinProps) {
   }, [logoURL]);
 
   return (
-    <tr className={[styles.row, styles.table__row].join(' ')}>
+    <Link
+      to={`coins/${id}`}
+      className={[styles.row, styles.table__row].join(' ')}
+    >
       <td className={styles.cell}>{index + 1}</td>
       <td className={styles.cell}>{symbol}</td>
       <td className={styles.cell}>
@@ -47,6 +51,6 @@ export default function Coin({ coin, index }: CoinProps) {
       <td className={[styles.cell, cell__button].join(' ')}>
         <Button>Add</Button>
       </td>
-    </tr>
+    </Link>
   );
 }

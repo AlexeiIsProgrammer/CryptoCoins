@@ -1,3 +1,5 @@
+import { HistoryType } from './types';
+
 export interface ICoin {
   id: string;
   rank: string;
@@ -14,5 +16,14 @@ export interface ICoin {
 
 export interface ICoins {
   data: ICoin[];
+  timestamp: number;
+}
+export interface ICoinResponse {
+  data: ICoin;
+  timestamp: number;
+}
+
+export interface ICoinHistoryResponse {
+  data: HistoryType[];
   timestamp: number;
 }

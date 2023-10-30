@@ -1,5 +1,5 @@
 import { ICoin } from '../services/CoinsService/types/interfaces';
-import { SortType, SortParam } from './types/types';
+import { SortParam } from './types/types';
 
 export const convertValueToPrice = (val: string | null) => {
   if (val === null) return '-';

@@ -1,0 +1,21 @@
+.popular-coins {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: flex-start;
+
+  padding: 5px;
+  background-color: white;
+  border-radius: 5px;
+
+  &__title {
+    text-align: center;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+  }
+}

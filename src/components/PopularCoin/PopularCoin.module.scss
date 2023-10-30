@@ -1,0 +1,22 @@
+.popular-coin {
+  padding: 10px;
+  background-color: black;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 14px;
+  color: white;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+
+  &__name {
+  }
+  &__price {
+  }
+
+  &__change {
+  }
+}

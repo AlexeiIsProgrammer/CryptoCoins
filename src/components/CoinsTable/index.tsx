@@ -21,10 +21,11 @@ export default function CoinsTable() {
   });
 
   const [coins, setCoins] = useState<ICoin[]>([]);
+  const [filteredCoins, setFilteredCoins] = useState<ICoin[]>([]);
 
   useEffect(() => {
     if (data) {
-      setCoins(
+      setFilteredCoins(
         data.data.filter(
           (coin) =>
             !(
@@ -35,55 +36,66 @@ export default function CoinsTable() {
         )
       );
     }
-  }, [data]);
+  }, [data, coins]);
 
-  if (isLoading) {
-    return <h1>Loading...</h1>;
+  let content: JSX.Element;
+
+  switch (true) {
+    case isLoading:
+      content = <h1>Loading...</h1>;
+      break;
+    case error !== undefined:
+      content = <h1>Some error here...</h1>;
+      break;
+
+    default:
+      content = (
+        <>
+          <table className={styles.table}>
+            <thead className={styles.table__header}>
+              <tr>
+                <th className={styles.cell}>#</th>
+                <th className={styles.cell}>Symb</th>
+                <th className={styles.cell}>Img</th>
+                <SortHeader coins={coins} setCoins={setCoins} field="priceUsd">
+                  Price
+                </SortHeader>
+                <SortHeader
+                  coins={coins}
+                  setCoins={setCoins}
+                  field="marketCapUsd"
+                >
+                  MarketVol
+                </SortHeader>
+                <SortHeader
+                  coins={coins}
+                  setCoins={setCoins}
+                  field="changePercent24Hr"
+                >
+                  24hPercent
+                </SortHeader>
+                <th className={styles.cell}>
+                  <Input
+                    placeholder="Search coins.."
+                    value={searchQuery}
+                    onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                      setSearchQuery(e.currentTarget.value);
+                    }}
+                  />
+                </th>
+              </tr>
+            </thead>
+            <tbody className={styles.table__body}>
+              {filteredCoins.map((coin, index) => (
+                <Coin key={coin.id} index={index + OFFSET} coin={coin} />
+              ))}
+            </tbody>
+          </table>
+          <Pagination page={page} setPage={setPage} />
+        </>
+      );
+      break;
   }
 
-  if (error) {
-    return error && <h1>Some error here...</h1>;
-  }
-
-  return (
-    <>
-      <table className={styles.table}>
-        <thead className={styles.table__header}>
-          <tr>
-            <th className={styles.cell}>#</th>
-            <th className={styles.cell}>Symb</th>
-            <th className={styles.cell}>Img</th>
-            <SortHeader coins={coins} setCoins={setCoins} field="priceUsd">
-              Price
-            </SortHeader>
-            <SortHeader coins={coins} setCoins={setCoins} field="marketCapUsd">
-              MarketVol
-            </SortHeader>
-            <SortHeader
-              coins={coins}
-              setCoins={setCoins}
-              field="changePercent24Hr"
-            >
-              24hPercent
-            </SortHeader>
-            <th className={styles.cell}>
-              <Input
-                placeholder="Search btc"
-                value={searchQuery}
-                onChange={(e: React.FormEvent<HTMLInputElement>) => {
-                  setSearchQuery(e.currentTarget.value);
-                }}
-              />
-            </th>
-          </tr>
-        </thead>
-        <tbody className={styles.table__body}>
-          {coins.map((coin, index) => (
-            <Coin key={coin.id} index={index + OFFSET} coin={coin} />
-          ))}
-        </tbody>
-      </table>
-      <Pagination page={page} setPage={setPage} />
-    </>
-  );
+  return content;
 }

@@ -1,7 +1,9 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import coinsAPI from '../services/CoinsService';
+import bagReducer from './slices/bagSlice';
 
 export const rootReducer = combineReducers({
+  bag: bagReducer,
   [coinsAPI.reducerPath]: coinsAPI.reducer,
 });
 
