@@ -1,0 +1,12 @@
+.diagram {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &__diagram {
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid black;
+    background-color: white;
+  }
+}

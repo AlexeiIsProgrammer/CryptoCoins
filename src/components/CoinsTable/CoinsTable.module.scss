@@ -1,0 +1,88 @@
+@mixin table-block {
+  border-radius: 5px;
+  padding: 5px;
+  background-color: aliceblue;
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+
+  padding: 10px;
+
+  &__row {
+    display: contents;
+    color: black;
+  }
+
+  &__header {
+    @include table-block;
+    background-color: black;
+    color: white;
+  }
+  &__body {
+    @include table-block;
+  }
+
+  @media (max-width: 768px) {
+    display: block;
+    height: 100%;
+    overflow-y: hidden;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+.row {
+  cursor: pointer;
+  padding: 2px;
+
+  transition: 0.2s ease;
+
+  &:hover,
+  &:hover .cell {
+    background-color: black;
+  }
+
+  &:hover .cell,
+  &:hover .cell__link {
+    color: white;
+  }
+}
+
+.cell {
+  padding: 5px;
+
+  text-align: center;
+  vertical-align: middle;
+  background-color: aliceblue;
+
+  transition: 0.3s ease;
+
+  &__header {
+    color: white;
+  }
+
+  &__no-items {
+    font-size: 50px;
+    color: white;
+    background-color: black;
+  }
+
+  &__image {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+
+    &_unloaded {
+      justify-content: center;
+    }
+  }
+
+  &--sticky {
+    position: sticky;
+    left: 0;
+  }
+}

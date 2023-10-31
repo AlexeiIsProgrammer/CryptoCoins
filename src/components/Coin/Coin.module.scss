@@ -1,0 +1,9 @@
+.cell {
+  &__button {
+    padding: 0;
+
+    & button {
+      border-radius: 0;
+    }
+  }
+}
