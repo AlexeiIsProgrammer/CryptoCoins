@@ -1,4 +1,3 @@
-import React from 'react';
 import CoinInfoRowProps from './types/types';
 import styles from './CoinInfoRow.module.scss';
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import NumberInput from '../UI/NumberInput';
 import styles from './BuyCoin.module.scss';
 import Button from '../UI/Button';

@@ -1,4 +1,3 @@
-import React from 'react';
 import NumberInputProps from './types/types';
 import styles from './NumberInput.module.scss';
 

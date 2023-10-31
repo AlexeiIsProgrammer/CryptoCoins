@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './UserCoins.module.scss';
 import { useAppSelector } from '../../hooks';
 import { bagSelector, getCostOfBagSelector } from '../../store/selectors';

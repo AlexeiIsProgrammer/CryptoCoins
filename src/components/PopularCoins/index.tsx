@@ -1,4 +1,3 @@
-import React from 'react';
 import coinsAPI from '../../services/CoinsService';
 import PopularCoin from '../PopularCoin';
 import styles from './PopularCoins.module.scss';

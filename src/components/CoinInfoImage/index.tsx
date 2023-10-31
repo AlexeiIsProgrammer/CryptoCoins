@@ -1,4 +1,3 @@
-import React from 'react';
 import CoinInfoImageProps from './types/types';
 import styles from './CoinInfoImage.module.scss';
 import Button from '../UI/Button';

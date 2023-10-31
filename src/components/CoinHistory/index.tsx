@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { Line } from '@ant-design/charts';
@@ -55,7 +55,6 @@ export default function CoinHistory() {
 
   const config = {
     data: arrToChartData() || [],
-    padding: 'auto',
     smooth: true,
     xField: 'date',
     yField: 'priceUsd',

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useParams } from 'react-router-dom';
 import coinsAPI from '../../services/CoinsService';
 import CoinInfoImage from '../../components/CoinInfoImage';

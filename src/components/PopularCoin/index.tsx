@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import PopularCoinProps from './types/types';
 import styles from './PopularCoin.module.scss';

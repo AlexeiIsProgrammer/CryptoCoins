@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDispatch } from 'react-redux';
 import styles from './Modal.module.scss';
 import { bagSelector } from '../../store/selectors';

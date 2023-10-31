@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import PopularCoins from '../PopularCoins';
 import Button from '../UI/Button';
 import styles from './Header.module.scss';

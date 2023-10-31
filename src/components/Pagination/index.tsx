@@ -1,4 +1,3 @@
-import React from 'react';
 import Button from '../UI/Button';
 import PaginationProps from './types/types';
 import styles from './Pagination.module.scss';

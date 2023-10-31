@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import CoinProps from './types/types';
 import Button from '../UI/Button';
-import { cell__button } from './Coin.module.scss';
+import coin_styles from './Coin.module.scss';
 import styles from '../CoinsTable/CoinsTable.module.scss';
 import { convertValueToPercent, convertValueToPrice } from '../../utils';
 import { useAppDispatch } from '../../hooks';
@@ -67,7 +67,7 @@ export default function Coin({ coin, index }: CoinProps) {
         <td className={styles.cell}>
           {convertValueToPercent(changePercent24Hr)}
         </td>
-        <td className={[styles.cell, cell__button].join(' ')}>
+        <td className={[styles.cell, coin_styles.cell__button].join(' ')}>
           <Button onClick={buyCoinHandle}>Add</Button>
         </td>
       </Link>

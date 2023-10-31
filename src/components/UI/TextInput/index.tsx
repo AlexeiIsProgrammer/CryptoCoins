@@ -1,4 +1,3 @@
-import React from 'react';
 import TextInputProps from './types/types';
 import styles from './TextInput.module.scss';
 

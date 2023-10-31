@@ -1,4 +1,3 @@
-import React from 'react';
 import BagCoinProps from './types/types';
 import styles from './BagCoin.module.scss';
 import Button from '../UI/Button';

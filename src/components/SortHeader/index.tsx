@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { sortByQuery } from '../../utils';
 import { SortType } from '../../utils/types/types';
 import SortHeaderProps from './types/types';
-import { cell__header } from '../CoinsTable/CoinsTable.module.scss';
+import table__styles from '../CoinsTable/CoinsTable.module.scss';
 import styles from './SortHeader.module.scss';
 
 export default function SortHeader({
@@ -44,7 +44,11 @@ export default function SortHeader({
 
   return (
     <th
-      className={[cell__header, styles['sort-header'], sortClassName].join(' ')}
+      className={[
+        table__styles.cell__header,
+        styles['sort-header'],
+        sortClassName,
+      ].join(' ')}
       onClick={sortHandle}
     >
       {children}
