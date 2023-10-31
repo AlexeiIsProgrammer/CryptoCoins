@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
-import { REHYDRATE } from 'redux-persist';
 import {
   ICoinHistoryResponse,
   ICoinResponse,
