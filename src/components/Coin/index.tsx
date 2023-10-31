@@ -40,12 +40,19 @@ export default function Coin({ coin, index }: CoinProps) {
   }, [logoURL]);
 
   return (
-    <tr className={[styles.row, styles.table__row].join(' ')}>
-      <td className={styles.cell}>{index + 1}</td>
-      <td className={styles.cell}>{symbol}</td>
+    <tr className={[styles.row].join(' ')}>
+      <Link
+        className={[styles.cell__link, styles.table__row].join(' ')}
+        to={`coins/${id}`}
+      >
+        <td className={[styles.cell, styles['cell--sticky']].join(' ')}>
+          {index + 1}
+        </td>
+        <td className={[styles.cell, styles['cell--sticky']].join(' ')}>
+          {symbol}
+        </td>
 
-      <td className={styles.cell}>
-        <Link to={`coins/${id}`}>
+        <td className={[styles.cell, styles['cell--sticky']].join(' ')}>
           <div
             className={
               isLoaded ? styles.cell__image : styles.cell__image_unloaded
@@ -54,16 +61,16 @@ export default function Coin({ coin, index }: CoinProps) {
             {isLoaded && <img src={logoURL} width={30} height={30} alt={id} />}
             <span>{id}</span>
           </div>
-        </Link>
-      </td>
-      <td className={styles.cell}>{convertValueToPrice(priceUsd)}</td>
-      <td className={styles.cell}>{convertValueToPrice(marketCapUsd)}</td>
-      <td className={styles.cell}>
-        {convertValueToPercent(changePercent24Hr)}
-      </td>
-      <td className={[styles.cell, cell__button].join(' ')}>
-        <Button onClick={buyCoinHandle}>Add</Button>
-      </td>
+        </td>
+        <td className={styles.cell}>{convertValueToPrice(priceUsd)}</td>
+        <td className={styles.cell}>{convertValueToPrice(marketCapUsd)}</td>
+        <td className={styles.cell}>
+          {convertValueToPercent(changePercent24Hr)}
+        </td>
+        <td className={[styles.cell, cell__button].join(' ')}>
+          <Button onClick={buyCoinHandle}>Add</Button>
+        </td>
+      </Link>
     </tr>
   );
 }

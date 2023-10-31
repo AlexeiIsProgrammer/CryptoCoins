@@ -24,19 +24,23 @@ export default function CoinsTable() {
   const [filteredCoins, setFilteredCoins] = useState<ICoin[]>([]);
 
   useEffect(() => {
+    setFilteredCoins(coins);
+  }, [coins]);
+
+  useEffect(() => {
     if (data) {
-      setFilteredCoins(
+      setCoins(
         data.data.filter(
           (coin) =>
             !(
               valueIsNull(coin.changePercent24Hr) ||
-              valueIsNull(coin.volumeUsd24Hr) ||
+              valueIsZero(coin.marketCapUsd) ||
               valueIsZero(coin.priceUsd)
             )
         )
       );
     }
-  }, [data, coins]);
+  }, [data]);
 
   let content: JSX.Element;
 
@@ -54,44 +58,61 @@ export default function CoinsTable() {
           <table className={styles.table}>
             <thead className={styles.table__header}>
               <tr>
-                <th className={styles.cell}>#</th>
-                <th className={styles.cell}>Symb</th>
-                <th className={styles.cell}>Img</th>
-                <SortHeader coins={coins} setCoins={setCoins} field="priceUsd">
-                  Price
+                <th className={styles.cell__header}>#</th>
+                <th className={styles.cell__header}>Symbol</th>
+                <th className={styles.cell__header}>Icon</th>
+                <SortHeader
+                  coins={coins}
+                  setFilteredCoins={setFilteredCoins}
+                  field="priceUsd"
+                >
+                  Price in USD
                 </SortHeader>
                 <SortHeader
                   coins={coins}
-                  setCoins={setCoins}
+                  setFilteredCoins={setFilteredCoins}
                   field="marketCapUsd"
                 >
-                  MarketVol
+                  Market Volume
                 </SortHeader>
                 <SortHeader
                   coins={coins}
-                  setCoins={setCoins}
+                  setFilteredCoins={setFilteredCoins}
                   field="changePercent24Hr"
                 >
-                  24hPercent
+                  24h percent
                 </SortHeader>
-                <th className={styles.cell}>
+                <th className={styles.cell__header}>
                   <TextInput
                     placeholder="Search coins.."
                     value={searchQuery}
                     onChange={(e: React.FormEvent<HTMLInputElement>) => {
                       setSearchQuery(e.currentTarget.value);
+                      setPage(1);
                     }}
                   />
                 </th>
               </tr>
             </thead>
             <tbody className={styles.table__body}>
-              {filteredCoins.map((coin, index) => (
-                <Coin key={coin.id} index={index + OFFSET} coin={coin} />
-              ))}
+              {filteredCoins.length === 0 ? (
+                <tr>
+                  <th colSpan={7} className={styles['cell__no-items']}>
+                    No money there, Go Back
+                  </th>
+                </tr>
+              ) : (
+                filteredCoins.map((coin, index) => (
+                  <Coin key={coin.id} index={index + OFFSET} coin={coin} />
+                ))
+              )}
             </tbody>
           </table>
-          <Pagination page={page} setPage={setPage} />
+          <Pagination
+            page={page}
+            setPage={setPage}
+            itemsPerPage={filteredCoins.length}
+          />
         </>
       );
       break;

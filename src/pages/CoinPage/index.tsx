@@ -5,6 +5,7 @@ import CoinInfoImage from '../../components/CoinInfoImage';
 import CoinInfoRow from '../../components/CoinInfoRow';
 import CoinHistory from '../../components/CoinHistory';
 import styles from './CoinPage.module.scss';
+import { convertValueToPrice } from '../../utils';
 
 export default function CoinPage() {
   const { coinId } = useParams();
@@ -22,33 +23,44 @@ export default function CoinPage() {
     case error !== undefined:
       content = <h1>Some error here...</h1>;
       break;
-    case data === undefined:
-      content = <h1>Crush data fetching</h1>;
-      break;
     default:
-      content = (
-        <div>
-          <div className={styles['coin-main']}>
-            <CoinInfoImage
-              name={data?.data.name}
-              image={data?.data.symbol}
-              id={data?.data.id}
-            />
-
-            <div>
-              <CoinInfoRow name="rank" value={data?.data.rank} />
-              <CoinInfoRow name="supply" value={data?.data.supply} />
-              <CoinInfoRow name="Цена в USD" value={data?.data.priceUsd} />
-              <CoinInfoRow
-                name="Рыночная капитализация в USD"
-                value={data?.data.marketCapUsd}
+      content =
+        data?.data === undefined ? (
+          <h1>Crush data fetching</h1>
+        ) : (
+          <div>
+            <div className={styles['coin-main']}>
+              <CoinInfoImage
+                name={data.data.name}
+                image={data.data.symbol}
+                id={data.data.id}
+                priceUsd={data.data.priceUsd}
               />
-              <CoinInfoRow name="maxSupply" value={data?.data.maxSupply} />
+
+              <div className={styles['coin-main__info']}>
+                <CoinInfoRow name="Rank" value={data.data.rank} />
+                <CoinInfoRow
+                  name="Supply"
+                  value={data.data.supply?.split('.')[0] || 'None'}
+                />
+                <CoinInfoRow
+                  name="Price in USD"
+                  value={convertValueToPrice(data.data.priceUsd)}
+                />
+                <CoinInfoRow
+                  name="Market Capitalization in USD"
+                  value={convertValueToPrice(data.data.marketCapUsd)}
+                />
+                <CoinInfoRow
+                  name="Max Supply"
+                  value={data.data.maxSupply?.split('.')[0] || 'None'}
+                />
+              </div>
             </div>
+            <CoinHistory />
           </div>
-          <CoinHistory />
-        </div>
-      );
+        );
+
       break;
   }
 

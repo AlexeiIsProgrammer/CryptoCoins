@@ -1,8 +1,16 @@
 import { ICoin } from '../services/CoinsService/types/interfaces';
 import { SortParam } from './types/types';
 
-export const convertValueToPrice = (val: string | null) => {
-  if (val === null) return '-';
+export const convertValueToPrice = (value: string | number | null) => {
+  if (value === null) return '-';
+
+  let val = value;
+
+  if (typeof val === 'number') {
+    if (val === 0) return val.toString();
+
+    val = val.toString();
+  }
 
   const [fullPart, floatPart] = val.split('.');
 
@@ -17,7 +25,7 @@ export const convertValueToPrice = (val: string | null) => {
   }, '')}.${floatPart.length !== 0 ? floatPart.slice(0, 2) : ''}`;
 };
 
-export function convertValueToPercent(val: string | null) {
+export function convertValueToPercent(val: string | number | null) {
   if (val === null) return '-';
 
   return `${(+val).toFixed(2)}%`;
@@ -40,4 +48,13 @@ export function sortByQuery(coins: ICoin[], param: SortParam): ICoin[] {
     default:
       return coins;
   }
+}
+
+interface SumType {
+  price: number;
+  count: number;
+}
+
+export function getSumOfCoins(coins: Array<SumType>): number {
+  return coins.reduce((acc, curr) => acc + curr.count * curr.price, 0);
 }

@@ -16,7 +16,7 @@ export type FetchCoinHistoryArgs = FetchCoinArgs & {
 export type HistoryType = {
   circulatingSupply: string;
   date: string;
-  priceUsd: string;
+  priceUsd: number;
   time: number;
 };
 

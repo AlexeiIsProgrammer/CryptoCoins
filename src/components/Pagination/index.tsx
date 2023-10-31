@@ -3,7 +3,11 @@ import Button from '../UI/Button';
 import PaginationProps from './types/types';
 import styles from './Pagination.module.scss';
 
-export default function Pagination({ page, setPage }: PaginationProps) {
+export default function Pagination({
+  page,
+  setPage,
+  itemsPerPage,
+}: PaginationProps) {
   const decrementPageHandle = () => {
     setPage(page - 1);
   };
@@ -18,7 +22,9 @@ export default function Pagination({ page, setPage }: PaginationProps) {
         Prev
       </Button>
       <p className={styles.pagination__page}>{page}</p>
-      <Button onClick={incrementPageHandle}>Next</Button>
+      <Button onClick={incrementPageHandle} disabled={itemsPerPage === 0}>
+        Next
+      </Button>
     </div>
   );
 }

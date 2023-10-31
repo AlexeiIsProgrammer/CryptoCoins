@@ -2,20 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { sortByQuery } from '../../utils';
 import { SortType } from '../../utils/types/types';
 import SortHeaderProps from './types/types';
-import { cell } from '../CoinsTable/CoinsTable.module.scss';
+import { cell__header } from '../CoinsTable/CoinsTable.module.scss';
 import styles from './SortHeader.module.scss';
 
 export default function SortHeader({
   coins,
-  setCoins,
+  setFilteredCoins,
   field,
   children,
 }: SortHeaderProps) {
   const [sortType, setSortType] = useState<SortType>('');
-  const [sortClassName, setSortClassName] = useState('');
+  const [sortClassName, setSortClassName] = useState(styles['sort-header_']);
 
   useEffect(() => {
-    setCoins(
+    setFilteredCoins(
       sortByQuery(structuredClone(coins), {
         type: sortType,
         field,
@@ -26,24 +26,27 @@ export default function SortHeader({
   const sortHandle = () => {
     switch (sortType) {
       case 'asc':
-        setSortClassName(styles['sort-header_asc']);
+        setSortClassName(styles['sort-header_desc']);
         setSortType('desc');
         break;
 
       case 'desc':
-        setSortClassName(styles['sort-header_desc']);
+        setSortClassName(styles['sort-header_']);
         setSortType('');
         break;
 
       default:
-        setSortClassName(styles['sort-header_']);
+        setSortClassName(styles['sort-header_asc']);
         setSortType('asc');
         break;
     }
   };
 
   return (
-    <th className={[cell, sortClassName].join(' ')} onClick={sortHandle}>
+    <th
+      className={[cell__header, styles['sort-header'], sortClassName].join(' ')}
+      onClick={sortHandle}
+    >
       {children}
     </th>
   );

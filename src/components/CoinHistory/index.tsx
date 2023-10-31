@@ -6,6 +6,7 @@ import coinsAPI from '../../services/CoinsService';
 
 import styles from './CoinHistory.module.scss';
 import { IntervalParam } from '../../services/CoinsService/types/types';
+import PeriodChecker from '../PeriodChecker';
 
 export default function CoinHistory() {
   const { coinId } = useParams();
@@ -24,33 +25,48 @@ export default function CoinHistory() {
     interval: selected,
   });
 
-  const arr = fetchData?.data.map((el) => ({
-    ...el,
-    priceUsd: +(+el.priceUsd).toFixed(2),
-  }));
+  const arrToChartData = () =>
+    fetchData?.data.map((el) => ({
+      ...el,
+      date: el.date
+        .split('T')
+        .map((dateEl, ind) => (ind === 1 ? dateEl.split('.')[0] : dateEl))
+        .join(' '),
+      priceUsd: +(+el.priceUsd).toFixed(10),
+    }));
 
   useEffect(() => {
-    const sortedArray = arr?.sort((a, b) => +a.priceUsd - +b.priceUsd);
-    if (sortedArray) {
-      setConstOptions({
-        min: +sortedArray[0].priceUsd.toFixed(0),
-        max: +sortedArray[sortedArray.length - 1].priceUsd.toFixed(0),
-      });
+    if (fetchData?.data.length !== 0) {
+      const sortedArray = arrToChartData()?.sort(
+        (a, b) => +a.priceUsd - +b.priceUsd
+      );
+      if (sortedArray) {
+        setConstOptions({
+          min: +sortedArray[0].priceUsd,
+          max: +sortedArray[sortedArray.length - 1].priceUsd,
+        });
+      }
     }
-  }, [arr]);
+  }, [fetchData]);
+
+  if (fetchData?.data.length === 0) {
+    return <h1>No some data info about this coin...</h1>;
+  }
 
   const config = {
-    data: arr || [],
+    data: arrToChartData() || [],
     padding: 'auto',
     smooth: true,
     xField: 'date',
     yField: 'priceUsd',
+    lineStyle: {
+      stroke: '#000',
+    },
     yAxis: {
       min: constOptions.min,
       max: constOptions.max,
     },
     xAxis: {
-      type: 'timeCat',
       tickCount: 10,
     },
   };
@@ -67,18 +83,7 @@ export default function CoinHistory() {
     default:
       content = (
         <div className={styles.diagram}>
-          <div className={styles.diagram__select}>
-            <select
-              onChange={(e) => {
-                setSelected(e.target.value);
-              }}
-              value={selected}
-            >
-              <option value="m1">День</option>
-              <option value="m15">7 дней</option>
-              <option value="h1">Месяц</option>
-            </select>
-          </div>
+          <PeriodChecker selected={selected} setSelected={setSelected} />
           <div className={styles.diagram__diagram}>
             <Line {...config} />
           </div>

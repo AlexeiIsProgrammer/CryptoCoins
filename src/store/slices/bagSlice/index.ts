@@ -1,19 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { BagCoin, ModalType } from '../../types/types';
-
-interface BagState {
-  coins: BagCoin[];
-  loading: boolean;
-  error: '';
-
-  modal: {
-    isOpened: boolean;
-    type: ModalType;
-  };
-
-  coinToBuy: BagCoin | null;
-}
+import { BagState } from '../../types/interfaces';
 
 const initialState: BagState = {
   coins: [],

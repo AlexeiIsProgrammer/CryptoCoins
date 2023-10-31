@@ -8,11 +8,21 @@
   background-color: white;
   border-radius: 5px;
 
+  @media (max-width: 576px) {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
   &__title {
     text-align: center;
   }
 
   &__header {
+    @media (max-width: 991px) {
+      width: 100%;
+    }
     display: flex;
     flex-direction: column;
     gap: 5px;

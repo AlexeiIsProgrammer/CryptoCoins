@@ -10,7 +10,6 @@ export default function BuyCoin() {
   const { coinToBuy } = useAppSelector(bagSelector);
   const dispatch = useAppDispatch();
   const [coinValue, setCoinValue] = useState(1);
-  console.log(coinToBuy);
 
   const buyCoinHandle = () => {
     if (coinToBuy) {

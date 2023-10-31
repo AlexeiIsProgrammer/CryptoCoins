@@ -1,6 +1,6 @@
 type CoinInfoRowProps = {
   name: string;
-  value?: string;
+  value: string;
 };
 
 export default CoinInfoRowProps;

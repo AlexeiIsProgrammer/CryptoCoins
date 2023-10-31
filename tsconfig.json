@@ -22,6 +22,6 @@
 
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
-  "include": ["src", ".eslintrc.cjs", "./setupTests.ts", "./vite.config.ts"],
+  "include": ["src", ".eslintrc.cjs", "./vite.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

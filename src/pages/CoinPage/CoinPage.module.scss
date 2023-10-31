@@ -2,5 +2,16 @@
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  justify-content: space-between;
   gap: 20px;
+
+  flex-wrap: wrap;
+
+  @media (max-width: 991px) {
+    justify-content: center;
+  }
+
+  &__info {
+    width: 100%;
+  }
 }

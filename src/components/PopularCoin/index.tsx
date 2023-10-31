@@ -1,13 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PopularCoinProps from './types/types';
 import styles from './PopularCoin.module.scss';
 import { convertValueToPercent, convertValueToPrice } from '../../utils';
 
 export default function PopularCoin({ coin }: PopularCoinProps) {
-  const { symbol, priceUsd, changePercent24Hr } = coin;
+  const { id, symbol, priceUsd, changePercent24Hr } = coin;
 
   return (
-    <div className={styles['popular-coin']}>
+    <Link to={`coins/${id}`} className={styles['popular-coin']}>
       <span className={styles['popular-coin__name']}>{symbol}</span>
       <span className={styles['popular-coin__price']}>
         {convertValueToPrice(priceUsd)}
@@ -15,6 +16,6 @@ export default function PopularCoin({ coin }: PopularCoinProps) {
       <span className={styles['popular-coin__change']}>
         ({convertValueToPercent(changePercent24Hr)})
       </span>
-    </div>
+    </Link>
   );
 }

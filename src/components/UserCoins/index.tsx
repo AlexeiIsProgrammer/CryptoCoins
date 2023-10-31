@@ -1,11 +1,13 @@
 import React from 'react';
 import styles from './UserCoins.module.scss';
 import { useAppSelector } from '../../hooks';
-import { bagSelector } from '../../store/selectors';
+import { bagSelector, getCostOfBagSelector } from '../../store/selectors';
 import BagCoin from '../BagCoin';
+import { convertValueToPrice } from '../../utils';
 
 export default function UserCoins() {
   const { coins } = useAppSelector(bagSelector);
+  const bagCost = useAppSelector(getCostOfBagSelector);
 
   return (
     <div className={styles.bag}>
@@ -16,6 +18,12 @@ export default function UserCoins() {
           <h1>Your bag is empty!</h1>
         )}
       </ul>
+
+      {coins.length !== 0 && (
+        <p className={styles.bag__cost}>
+          Bag cost: {convertValueToPrice(bagCost.toString())}
+        </p>
+      )}
     </div>
   );
 }

@@ -16,17 +16,25 @@ export default function Modal() {
   };
 
   return (
-    <div className={`${styles.modal} ${modal.isOpened ? styles.active : ''}`}>
-      <span onClick={closeModalHandle} className={styles.modal__close} />
+    <>
+      <div
+        className={`${styles.modal__shadow} ${
+          modal.isOpened ? styles.active : ''
+        }`}
+        onClick={closeModalHandle}
+      />
+      <div className={`${styles.modal} ${modal.isOpened ? styles.active : ''}`}>
+        <span onClick={closeModalHandle} className={styles.modal__close} />
 
-      <div className={styles.modal__container}>
-        <h2 className={styles.modal__title}>
-          {modal.type === 'buy-coin' ? 'Buy coins' : 'Bag'}
-        </h2>
-        <div className={styles.modal__block}>
-          {modal.type === 'buy-coin' ? <BuyCoin /> : <UserCoins />}
+        <div className={styles.modal__container}>
+          <h2 className={styles.modal__title}>
+            {modal.type === 'buy-coin' ? 'Buy coins' : 'Bag'}
+          </h2>
+          <div className={styles.modal__block}>
+            {modal.type === 'buy-coin' ? <BuyCoin /> : <UserCoins />}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

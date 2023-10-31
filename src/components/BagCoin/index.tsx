@@ -4,6 +4,7 @@ import styles from './BagCoin.module.scss';
 import Button from '../UI/Button';
 import { useAppDispatch } from '../../hooks';
 import { removeCoin } from '../../store/slices/bagSlice';
+import { convertValueToPrice } from '../../utils';
 
 export default function BagCoin({ coin }: BagCoinProps) {
   const { price, id, count } = coin;
@@ -16,7 +17,9 @@ export default function BagCoin({ coin }: BagCoinProps) {
   return (
     <div className={styles['bag-coin']}>
       <span className={styles['bag-coin__name']}>{id}</span>
-      <span className={styles['bag-coin__price']}>{price}</span>
+      <span className={styles['bag-coin__price']}>
+        {convertValueToPrice(price.toString())}
+      </span>
       <span className={styles['bag-coin__count']}>x{count}</span>
       <Button onClick={removeCoinHandle}>Remove coin</Button>
     </div>

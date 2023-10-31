@@ -32,5 +32,5 @@ export default function PopularCoins() {
       break;
   }
 
-  return <div>{content}</div>;
+  return content;
 }

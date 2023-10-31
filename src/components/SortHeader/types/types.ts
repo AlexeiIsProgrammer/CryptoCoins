@@ -3,7 +3,7 @@ import { SortField } from '../../../utils/types/types';
 
 type SortHeaderProps = {
   coins: ICoin[];
-  setCoins: React.Dispatch<React.SetStateAction<ICoin[]>>;
+  setFilteredCoins: React.Dispatch<React.SetStateAction<ICoin[]>>;
   field: SortField;
   children: React.ReactNode;
 };
